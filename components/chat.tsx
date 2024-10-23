@@ -1,18 +1,19 @@
 'use client'
 
-import { cn } from '@/lib/utils'
+import { useAIState, useUIState } from 'ai/rsc'
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
+
 import { ChatList } from '@/components/chat-list'
 import { ChatPanel } from '@/components/chat-panel'
 import { EmptyScreen } from '@/components/empty-screen'
-import { useLocalStorage } from '@/lib/hooks/use-local-storage'
-import { useEffect, useState } from 'react'
-import { useUIState, useAIState } from 'ai/rsc'
-import { Message, Session } from '@/lib/types'
-import { usePathname, useRouter } from 'next/navigation'
-import { useScrollAnchor } from '@/lib/hooks/use-scroll-anchor'
-import { toast } from 'sonner'
-import { TickerTape } from '@/components/tradingview/ticker-tape'
 import { MissingApiKeyBanner } from '@/components/missing-api-key-banner'
+import { TickerTape } from '@/components/tradingview/ticker-tape'
+import { useLocalStorage } from '@/lib/hooks/use-local-storage'
+import { useScrollAnchor } from '@/lib/hooks/use-scroll-anchor'
+import { Message, Session } from '@/lib/types'
+import { cn } from '@/lib/utils'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
@@ -28,7 +29,7 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
   const [messages] = useUIState()
   const [aiState] = useAIState()
 
-  const [_, setNewChatId] = useLocalStorage('newChatId', id)
+  const [, setNewChatId] = useLocalStorage('newChatId', id)
 
   useEffect(() => {
     if (session?.user) {

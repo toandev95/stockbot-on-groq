@@ -1,14 +1,16 @@
 'use client'
 
-import { IconGroq, IconUser } from '@/components/ui/icons'
-import { cn } from '@/lib/utils'
-import { spinner } from './spinner'
-import { CodeBlock } from '../ui/codeblock'
-import { MemoizedReactMarkdown } from '../markdown'
+import { StreamableValue } from 'ai/rsc'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
-import { StreamableValue, useStreamableValue } from 'ai/rsc'
+
+import { IconOpenAI, IconUser } from '@/components/ui/icons'
 import { useStreamableText } from '@/lib/hooks/use-streamable-text'
+import { cn } from '@/lib/utils'
+
+import { MemoizedReactMarkdown } from '../markdown'
+import { CodeBlock } from '../ui/codeblock'
+import { spinner } from './spinner'
 
 // Different types of message bubbles.
 
@@ -36,8 +38,8 @@ export function BotMessage({
 
   return (
     <div className={cn('group relative flex items-start md:-ml-12', className)}>
-      <div className="flex size-[24px] shrink-0 select-none items-center justify-center rounded-md border bg-[#f55036] text-primary-foreground shadow-sm">
-        <IconGroq />
+      <div className="flex size-[24px] shrink-0 select-none items-center justify-center rounded-md border bg-black text-primary-foreground shadow-sm">
+        <IconOpenAI />
       </div>
       <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
         <MemoizedReactMarkdown
@@ -47,7 +49,7 @@ export function BotMessage({
             p({ children }) {
               return <p className="mb-2 last:mb-0">{children}</p>
             },
-            code({ node, inline, className, children, ...props }) {
+            code({ inline, className, children, ...props }) {
               if (children.length) {
                 if (children[0] == '▍') {
                   return (
@@ -97,11 +99,11 @@ export function BotCard({
     <div className="group relative flex items-start md:-ml-12">
       <div
         className={cn(
-          'flex size-[24px] shrink-0 select-none items-center justify-center rounded-md border bg-[#f55036] text-primary-foreground shadow-sm',
+          'flex size-[24px] shrink-0 select-none items-center justify-center rounded-md border bg-black text-primary-foreground shadow-sm',
           !showAvatar && 'invisible'
         )}
       >
-        <IconGroq />
+        <IconOpenAI />
       </div>
       <div className="ml-4 flex-1 pl-2">{children}</div>
     </div>
@@ -123,8 +125,8 @@ export function SystemMessage({ children }: { children: React.ReactNode }) {
 export function SpinnerMessage() {
   return (
     <div className="group relative flex items-start md:-ml-12">
-      <div className="flex size-[24px] shrink-0 select-none items-center justify-center rounded-md border bg-[#f55036] text-primary-foreground shadow-sm">
-        <IconGroq />
+      <div className="flex size-[24px] shrink-0 select-none items-center justify-center rounded-md border bg-black text-primary-foreground shadow-sm">
+        <IconOpenAI />
       </div>
       <div className="ml-4 h-[24px] flex flex-row items-center flex-1 space-y-2 overflow-hidden px-1">
         {spinner}

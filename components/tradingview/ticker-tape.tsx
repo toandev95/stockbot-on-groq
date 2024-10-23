@@ -1,8 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { useRef, useEffect } from 'react'
-import Script from 'next/script'
+import { useEffect, useRef } from 'react'
 
 export function TickerTape() {
   const container = useRef<HTMLDivElement>(null)
@@ -45,7 +44,7 @@ export function TickerTape() {
       isTransparent: true,
       displayMode: 'adaptive',
       colorTheme: 'light',
-      locale: 'en'
+      locale: 'vi_VN'
     })
 
     container.current.appendChild(script)
@@ -54,6 +53,7 @@ export function TickerTape() {
       if (container.current) {
         const scriptElement = container.current.querySelector('script')
         if (scriptElement) {
+          // eslint-disable-next-line react-hooks/exhaustive-deps
           container.current.removeChild(scriptElement)
         }
       }
@@ -73,7 +73,9 @@ export function TickerTape() {
           target="_blank"
           className="justify-end text-right"
         >
-          <span className="">Track all markets on TradingView</span>
+          <span className="text-xs">
+            Theo dõi tất cả các thị trường trên TradingView
+          </span>
         </a>
       </div>
     </div>

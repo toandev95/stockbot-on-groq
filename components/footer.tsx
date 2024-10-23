@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { cn } from '@/lib/utils'
-import { ExternalLink } from '@/components/external-link'
 
 export function FooterText({ className, ...props }: React.ComponentProps<'p'>) {
   return (
@@ -12,8 +11,8 @@ export function FooterText({ className, ...props }: React.ComponentProps<'p'>) {
       )}
       {...props}
     >
-      StockBot may provide inaccurate information and does not provide
-      investment advice.
+      StockBot có thể cung cấp thông tin không chính xác và không cung cấp lời
+      khuyên đầu tư.
     </p>
   )
 }

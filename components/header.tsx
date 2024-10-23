@@ -1,43 +1,20 @@
-import * as React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import * as React from 'react'
 
+import { buttonVariants } from '@/components/ui/button'
+import { IconGitHub, IconSeparator } from '@/components/ui/icons'
 import { cn } from '@/lib/utils'
-import { Button, buttonVariants } from '@/components/ui/button'
-import {
-  IconGitHub,
-  IconGroq,
-  IconSeparator,
-  IconVercel
-} from '@/components/ui/icons'
-import { Session } from '@/lib/types'
 
 async function UserOrLogin() {
   return (
     <>
-      <Link href="https://wow.groq.com/groq-labs/" rel="nofollow">
-        {/* <IconGroq className="size-6 mr-2 dark:hidden" />
-          <IconGroq className="hidden size-6 mr-2 dark:block" /> */}
-        <Image
-          src="/groqlabs-logo-black.png"
-          alt="GroqLabs Logo"
-          width={100}
-          height={30}
-        />
+      <Link href="https://chat.toandev.space" target="_blank" rel="nofollow">
+        <Image src="/logo.png" alt="GroqLabs Logo" width={30} height={30} />
       </Link>
-
       <div className="flex items-center font-semibold">
         <IconSeparator className="size-6 text-muted-foreground/50" />
         <a href="/new">StockBot</a>
-        <IconSeparator className="size-6 text-muted-foreground/50" />
-        <a
-          href="/new"
-          rel="noopener noreferrer"
-          className={cn(buttonVariants({ variant: 'ghost' }))}
-          style={{ borderRadius: 0, color: '#F55036', padding: '4px' }}
-        >
-          <span className="flex">Start New Chat</span>
-        </a>
       </div>
     </>
   )
@@ -54,10 +31,9 @@ export function Header() {
       <div className="flex items-center justify-end space-x-2">
         <a
           target="_blank"
-          href="https://github.com/bklieger-groq/groq-gen-ui/"
+          href="https://github.com/toandev95/stockbot-on-groq/"
           rel="noopener noreferrer"
-          className={cn(buttonVariants({ variant: 'outline' }))}
-          style={{ borderRadius: 0 }}
+          className={cn(buttonVariants({ variant: 'outline' }), 'rounded-none')}
         >
           <IconGitHub />
           <span className="hidden ml-2 md:flex">GitHub</span>

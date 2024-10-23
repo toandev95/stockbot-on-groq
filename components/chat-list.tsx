@@ -1,8 +1,6 @@
 import { Separator } from '@/components/ui/separator'
 import { UIState } from '@/lib/chat/actions'
 import { Session } from '@/lib/types'
-import Link from 'next/link'
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
 
 export interface ChatList {
   messages: UIState
@@ -10,7 +8,7 @@ export interface ChatList {
   isShared: boolean
 }
 
-export function ChatList({ messages, session, isShared }: ChatList) {
+export function ChatList({ messages }: ChatList) {
   if (!messages.length) {
     return null
   }

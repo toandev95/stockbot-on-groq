@@ -1,20 +1,21 @@
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-
 import '@/app/globals.css'
-import { cn } from '@/lib/utils'
+
+import { GeistMono } from 'geist/font/mono'
+import { GeistSans } from 'geist/font/sans'
+
+import { Header } from '@/components/header'
 // import { ThemeToggle } from '@/components/theme-toggle'
 import { Providers } from '@/components/providers'
-import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
+import { cn } from '@/lib/utils'
 
 export const metadata = {
   metadataBase: process.env.VERCEL_URL
     ? new URL(`https://${process.env.VERCEL_URL}`)
     : undefined,
   title: {
-    default: 'StockBot powered by Groq',
-    template: `%s - StockBot powered by Groq`
+    default: 'StockBot powered by ToanChat',
+    template: `%s - StockBot powered by ToanChat`
   },
   description:
     'Lightning Fast AI Chatbot that Responds With Live Interactive Stock Charts, Financials, News, Screeners, and More.',

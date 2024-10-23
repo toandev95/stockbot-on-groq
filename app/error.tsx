@@ -7,7 +7,7 @@ interface ErrorProps {
   reset: () => void
 }
 
-export default function Error({ error, reset }: ErrorProps) {
+export default function Error({ error }: ErrorProps) {
   useEffect(() => {
     console.error(error)
   }, [error])
@@ -17,7 +17,7 @@ export default function Error({ error, reset }: ErrorProps) {
       <div className="text-red-700 font-medium">Error: {error.message}</div>
       <div className="flex items-center mt-2">
         <a
-          href="https://github.com/bklieger-groq/stockbot-on-groq/issues"
+          href="https://github.com/toandev95/stockbot-on-groq/issues"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center text-sm text-red-800 hover:text-red-900"

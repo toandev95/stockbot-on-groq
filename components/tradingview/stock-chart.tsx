@@ -1,13 +1,19 @@
 'use client'
 
-import React, { useEffect, useRef, memo } from 'react'
+import React, { memo, useEffect, useRef } from 'react'
 
 type ComparisonSymbolObject = {
-  symbol: string;
-  position: "SameScale";
-};
+  symbol: string
+  position: 'SameScale'
+}
 
-export function StockChart({ symbol, comparisonSymbols }: { symbol: string, comparisonSymbols: ComparisonSymbolObject[] }) {
+export function StockChart({
+  symbol,
+  comparisonSymbols
+}: {
+  symbol: string
+  comparisonSymbols: ComparisonSymbolObject[]
+}) {
   const container = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -25,7 +31,7 @@ export function StockChart({ symbol, comparisonSymbols }: { symbol: string, comp
       theme: 'light',
       style: comparisonSymbols.length === 0 ? '1' : '2',
       hide_volume: comparisonSymbols.length === 0 ? false : true,
-      locale: 'en',
+      locale: 'vi_VN',
       backgroundColor: 'rgba(255, 255, 255, 1)',
       gridColor: 'rgba(247, 247, 247, 1)',
       withdateranges: true,
@@ -41,6 +47,7 @@ export function StockChart({ symbol, comparisonSymbols }: { symbol: string, comp
 
     return () => {
       if (container.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         container.current.removeChild(script)
       }
     }
@@ -63,7 +70,9 @@ export function StockChart({ symbol, comparisonSymbols }: { symbol: string, comp
             rel="noopener nofollow"
             target="_blank"
           >
-            <span className="">Track all markets on TradingView</span>
+            <span className="">
+              Theo dõi tất cả các thị trường trên TradingView
+            </span>
           </a>
         </div>
       </div>

@@ -1,13 +1,13 @@
-import * as React from 'react'
-import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { PromptForm } from '@/components/prompt-form'
-import { ButtonScrollToBottom } from '@/components/button-scroll-to-bottom'
-import { IconShare } from '@/components/ui/icons'
-import { FooterText } from '@/components/footer'
-import { useAIState, useActions, useUIState } from 'ai/rsc'
-import type { AI } from '@/lib/chat/actions'
+import { useActions, useUIState } from 'ai/rsc'
 import { nanoid } from 'nanoid'
+import * as React from 'react'
+import { useEffect, useState } from 'react'
+
+import { ButtonScrollToBottom } from '@/components/button-scroll-to-bottom'
+import { FooterText } from '@/components/footer'
+import { PromptForm } from '@/components/prompt-form'
+import type { AI } from '@/lib/chat/actions'
+
 import { UserMessage } from './stocks/message'
 
 export interface ChatPanelProps {
@@ -20,49 +20,13 @@ export interface ChatPanelProps {
 }
 
 export function ChatPanel({
-  id,
-  title,
   input,
   setInput,
   isAtBottom,
   scrollToBottom
 }: ChatPanelProps) {
-  const [aiState] = useAIState()
   const [messages, setMessages] = useUIState<typeof AI>()
   const { submitUserMessage } = useActions()
-
-  const exampleMessages = [
-    {
-      heading: 'What is the price',
-      subheading: 'of Apple Inc.?',
-      message: 'What is the price of Apple stock?'
-    },
-    {
-      heading: 'Show me a stock chart',
-      subheading: 'for $GOOGL',
-      message: 'Show me a stock chart for $GOOGL'
-    },
-    {
-      heading: 'What are some recent',
-      subheading: `events about Amazon?`,
-      message: `What are some recent events about Amazon?`
-    },
-    {
-      heading: `What are Microsoft's`,
-      subheading: 'latest financials?',
-      message: `What are Microsoft's latest financials?`
-    },
-    {
-      heading: 'How is the stock market',
-      subheading: 'performing today by sector?',
-      message: `How is the stock market performing today by sector?`
-    },
-    {
-      heading: 'Show me a screener',
-      subheading: 'to find new stocks',
-      message: 'Show me a screener to find new stocks'
-    }
-  ]
 
   interface ExampleMessage {
     heading: string
@@ -73,6 +37,39 @@ export function ChatPanel({
   const [randExamples, setRandExamples] = useState<ExampleMessage[]>([])
 
   useEffect(() => {
+    const exampleMessages = [
+      {
+        heading: 'Giá cổ phiếu',
+        subheading: 'của Apple Inc.?',
+        message: 'Giá cổ phiếu của Apple Inc. là bao nhiêu?'
+      },
+      {
+        heading: 'Cho tôi xem biểu đồ cổ phiếu',
+        subheading: 'của $GOOGL',
+        message: 'Cho tôi xem biểu đồ cổ phiếu của $GOOGL'
+      },
+      {
+        heading: 'Các sự kiện gần đây',
+        subheading: `về Amazon?`,
+        message: `Các sự kiện gần đây về Amazon là gì?`
+      },
+      {
+        heading: `Thông tin tài chính mới nhất`,
+        subheading: 'của Microsoft?',
+        message: `Thông tin tài chính mới nhất của Microsoft là gì?`
+      },
+      {
+        heading: 'Thị trường chứng khoán',
+        subheading: 'hiện đang thế nào?',
+        message: `Thị trường chứng khoán hiện đang thế nào theo từng ngành?`
+      },
+      {
+        heading: 'Cho tôi xem một bộ lọc',
+        subheading: 'để tìm cổ phiếu mới',
+        message: 'Cho tôi xem một bộ lọc để tìm cổ phiếu mới'
+      }
+    ]
+
     const shuffledExamples = [...exampleMessages].sort(
       () => 0.5 - Math.random()
     )

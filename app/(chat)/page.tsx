@@ -1,11 +1,10 @@
-import { nanoid } from '@/lib/utils'
+import { getMissingKeys } from '@/app/actions'
 import { Chat } from '@/components/chat'
 import { AI } from '@/lib/chat/actions'
-import { Session } from '@/lib/types'
-import { getMissingKeys } from '@/app/actions'
+import { nanoid } from '@/lib/utils'
 
 export const metadata = {
-  title: 'StockBot powered by Groq'
+  title: 'StockBot powered by ToanChat'
 }
 
 export default async function IndexPage() {

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, memo } from 'react'
+import React, { memo, useEffect, useRef } from 'react'
 
 export function StockScreener({}) {
   const container = useRef<HTMLDivElement>(null)
@@ -20,7 +20,7 @@ export function StockScreener({}) {
       market: 'america',
       showToolbar: true,
       colorTheme: 'light',
-      locale: 'en',
+      locale: 'vi_VN',
       isTransparent: true
     })
 
@@ -28,6 +28,7 @@ export function StockScreener({}) {
 
     return () => {
       if (container.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         container.current.removeChild(script)
       }
     }
@@ -50,7 +51,9 @@ export function StockScreener({}) {
             rel="noopener nofollow"
             target="_blank"
           >
-            <span className="">Track all markets on TradingView</span>
+            <span className="">
+              Theo dõi tất cả các thị trường trên TradingView
+            </span>
           </a>
         </div>
       </div>

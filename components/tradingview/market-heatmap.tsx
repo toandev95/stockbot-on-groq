@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, memo } from 'react'
+import React, { memo, useEffect, useRef } from 'react'
 
 export function MarketHeatmap({}) {
   const container = useRef<HTMLDivElement>(null)
@@ -19,7 +19,7 @@ export function MarketHeatmap({}) {
       grouping: 'sector',
       blockSize: 'market_cap_basic',
       blockColor: 'change',
-      locale: 'en',
+      locale: 'vi_VN',
       symbolUrl: '',
       colorTheme: 'light',
       hasTopBar: false,
@@ -35,6 +35,7 @@ export function MarketHeatmap({}) {
 
     return () => {
       if (container.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         container.current.removeChild(script)
       }
     }
@@ -57,7 +58,9 @@ export function MarketHeatmap({}) {
             rel="noopener nofollow"
             target="_blank"
           >
-            <span className="">Track all markets on TradingView</span>
+            <span className="">
+              Theo dõi tất cả các thị trường trên TradingView
+            </span>
           </a>
         </div>
       </div>

@@ -1,12 +1,11 @@
 'use client'
 
+import { useActions, useUIState } from 'ai/rsc'
+import { nanoid } from 'nanoid'
+import { useRouter } from 'next/navigation'
 import * as React from 'react'
 import Textarea from 'react-textarea-autosize'
 
-import { useActions, useUIState } from 'ai/rsc'
-
-import { UserMessage } from './stocks/message'
-import { type AI } from '@/lib/chat/actions'
 import { Button } from '@/components/ui/button'
 import { IconArrowDown, IconPlus } from '@/components/ui/icons'
 import {
@@ -14,11 +13,11 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
+import { type AI } from '@/lib/chat/actions'
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
-import { nanoid } from 'nanoid'
-import { useRouter } from 'next/navigation'
-
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
+
+import { UserMessage } from './stocks/message'
 
 export function PromptForm({
   input,
@@ -31,8 +30,8 @@ export function PromptForm({
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
   const { submitUserMessage } = useActions()
-  const [_, setMessages] = useUIState<typeof AI>()
-  const [apiKey, setApiKey] = useLocalStorage('groqKey', '')
+  const [, setMessages] = useUIState<typeof AI>()
+  const [apiKey] = useLocalStorage('groqKey', '')
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -81,16 +80,16 @@ export function PromptForm({
               }}
             >
               <IconPlus />
-              <span className="sr-only">New Chat</span>
+              <span className="sr-only">Chat Mới</span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>New Chat</TooltipContent>
+          <TooltipContent>Chat Mới</TooltipContent>
         </Tooltip>
         <Textarea
           ref={inputRef}
           tabIndex={0}
           onKeyDown={onKeyDown}
-          placeholder="Send a message."
+          placeholder="Nhập tin nhắn..."
           className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
           autoFocus
           spellCheck={false}
@@ -108,10 +107,10 @@ export function PromptForm({
                 <div className="rotate-180">
                   <IconArrowDown />
                 </div>
-                <span className="sr-only">Send message</span>
+                <span className="sr-only">Gửi tin nhắn</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Send message</TooltipContent>
+            <TooltipContent>Gửi tin nhắn</TooltipContent>
           </Tooltip>
         </div>
       </div>
