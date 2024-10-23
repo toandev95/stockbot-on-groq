@@ -73,7 +73,9 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
 
       <div
         className={cn(
-          messages.length ? 'pb-[200px] pt-4 md:pt-6' : 'pb-[200px] pt-0',
+          messages.length
+            ? 'pb-[100px] md:pb-[200px] pt-4 md:pt-6'
+            : 'pb-[200px] pt-0',
           className
         )}
         ref={messagesRef}

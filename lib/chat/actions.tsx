@@ -13,6 +13,7 @@ import { z } from 'zod'
 import { BotCard, BotMessage } from '@/components/stocks/message'
 import { SpinnerMessage } from '@/components/stocks/message'
 import { ETFHeatmap } from '@/components/tradingview/etf-heatmap'
+import ForexRates from '@/components/tradingview/forex-rates'
 import { MarketHeatmap } from '@/components/tradingview/market-heatmap'
 import { MarketOverview } from '@/components/tradingview/market-overview'
 import { MarketTrending } from '@/components/tradingview/market-trending'
@@ -72,7 +73,7 @@ async function generateCaption(
 
   const captionSystemMessage =
     `\
-You are a stock market conversation bot. You can provide the user information about stocks include prices and charts in the UI. You do not have access to any information and should only provide information by calling functions.
+You are a market conversation bot. You can provide the user information about stocks, forex, and other financial instruments including prices and charts in the UI. You do not have access to any information and should only provide information by calling functions.
 
 These are the tools you have available:
 1. showStockFinancials
@@ -101,6 +102,9 @@ This tool shows the daily top trending stocks including the top five gaining, lo
 
 9. showETFHeatmap
 This tool shows a heatmap of today's ETF market performance across sectors and asset classes.
+
+10. showForexRates
+This tool shows the exchange rates of forex pairs.
 
 
 You have just called a tool (` +
@@ -199,7 +203,7 @@ async function submitUserMessage(content: string) {
       initial: <SpinnerMessage />,
       maxRetries: 1,
       system: `\
-You are a stock market conversation bot. You can provide the user information about stocks include prices and charts in the UI. You do not have access to any information and should only provide information by calling functions.
+You are a market conversation bot. You can provide the user information about stocks, forex, and other financial instruments including prices and charts in the UI. You do not have access to any information and should only provide information by calling functions.
 
 ### Cryptocurrency Tickers
 For any cryptocurrency, append "USD" at the end of the ticker when using functions. For instance, "DOGE" should be "DOGEUSD".
@@ -214,8 +218,8 @@ Assistant (you): { "tool_call": { "id": "pending", "type": "function", "function
 
 Example 2:
 
-User: What is the price of AAPL?
-Assistant (you): { "tool_call": { "id": "pending", "type": "function", "function": { "name": "showStockPrice" }, "parameters": { "symbol": "AAPL" } } } 
+User: What is the exchange rate of Gold?
+Assistant (you): { "tool_call": { "id": "pending", "type": "function", "function": { "name": "showForexRates" }, "parameters": { "pair": "XAUUSD" } } }
     `,
       messages: [
         ...aiState.get().messages.map((message: any) => ({
@@ -805,6 +809,69 @@ Assistant (you): { "tool_call": { "id": "pending", "type": "function", "function
             return (
               <BotCard>
                 <MarketTrending />
+                {caption}
+              </BotCard>
+            )
+          }
+        },
+        showForexRates: {
+          description:
+            'Show the exchange rates of forex pairs. Use this to show the exchange rates to the user.',
+          parameters: z.object({
+            pair: z
+              .string()
+              .describe('The forex pair symbol. e.g. EUR/USD, GBP/JPY.')
+          }),
+          generate: async function* ({ pair }) {
+            yield (
+              <BotCard>
+                <></>
+              </BotCard>
+            )
+
+            const toolCallId = nanoid()
+
+            aiState.done({
+              ...aiState.get(),
+              messages: [
+                ...aiState.get().messages,
+                {
+                  id: nanoid(),
+                  role: 'assistant',
+                  content: [
+                    {
+                      type: 'tool-call',
+                      toolName: 'showForexRates',
+                      toolCallId,
+                      args: { pair }
+                    }
+                  ]
+                },
+                {
+                  id: nanoid(),
+                  role: 'tool',
+                  content: [
+                    {
+                      type: 'tool-result',
+                      toolName: 'showForexRates',
+                      toolCallId,
+                      result: { pair }
+                    }
+                  ]
+                }
+              ]
+            })
+
+            const caption = await generateCaption(
+              pair,
+              [],
+              'showForexRates',
+              aiState
+            )
+
+            return (
+              <BotCard>
+                <ForexRates props={pair} />
                 {caption}
               </BotCard>
             )
