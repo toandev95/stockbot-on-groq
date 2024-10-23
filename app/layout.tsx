@@ -1,21 +1,33 @@
 import '@/app/globals.css'
 
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
+import { Fira_Sans as FiraSans } from 'next/font/google'
+import { Fira_Mono as FiraMono } from 'next/font/google'
 
 import { Header } from '@/components/header'
-// import { ThemeToggle } from '@/components/theme-toggle'
 import { Providers } from '@/components/providers'
 import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
+
+const firaSans = FiraSans({
+  weight: ['400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
+  subsets: ['latin', 'vietnamese'],
+  variable: '--fira-sans'
+})
+
+const firaMono = FiraMono({
+  weight: ['400', '500', '700'],
+  style: ['normal'],
+  subsets: ['latin'],
+  variable: '--fira-mono'
+})
 
 export const metadata = {
   metadataBase: process.env.VERCEL_URL
     ? new URL(`https://${process.env.VERCEL_URL}`)
     : undefined,
   title: {
-    default: 'StockBot powered by ToanChat',
-    template: `%s - StockBot powered by ToanChat`
+    default: 'StockBot powered by ToanChat'
   },
   description:
     'Lightning Fast AI Chatbot that Responds With Live Interactive Stock Charts, Financials, News, Screeners, and More.',
@@ -43,8 +55,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={cn(
           'font-sans antialiased',
-          GeistSans.variable,
-          GeistMono.variable
+          firaSans.variable,
+          firaMono.variable
         )}
       >
         <Toaster position="top-center" />

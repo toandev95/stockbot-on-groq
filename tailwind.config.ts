@@ -18,8 +18,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-geist-sans)'],
-        mono: ['var(--font-geist-mono)']
+        sans: ['var(--fira-sans)'],
+        mono: ['var(--fira-mono)']
       },
       colors: {
         border: 'hsl(var(--border))',

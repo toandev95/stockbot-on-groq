@@ -3,10 +3,6 @@ import { Chat } from '@/components/chat'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from '@/lib/utils'
 
-export const metadata = {
-  title: 'StockBot powered by ToanChat'
-}
-
 export default async function IndexPage() {
   const id = nanoid()
   const missingKeys = await getMissingKeys()
